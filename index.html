@@ -12,7 +12,9 @@
       font-family: "PingFang SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
       color: #fff;
       overflow-x: hidden;
-      /* ===== 【图片1/3】全背景图：把下面的文件名换成你的主播背景图 ===== */
+      /* ===== 【图片1/3 全背景图】===== */
+      /* 文件名: c4ced31b16e6aa56083989d5eaf237c8 */
+      /* 把它下载后重命名为 bg.jpg 或保持原名上传到仓库同目录 */
       background: linear-gradient(180deg, rgba(20,10,40,.55) 0%, rgba(60,20,80,.65) 50%, rgba(20,10,40,.7) 100%),
                   url("c4ced31b16e6aa56083989d5eaf237c8");
       background-size: cover;
@@ -42,26 +44,51 @@
 
     /* ========== 顶部标题区 ========== */
     .hero { text-align: center; margin-bottom: 28px; }
-    /* ===== 【图片2/3】标题装饰花/头像图：把下面的文件名换成你的装饰图 ===== */
-    .hero .deco-img {
-      width: 96px; height: 96px;
+
+    /* ===== 【图片2/3 云宫头像图】===== */
+    /* 文件名: 151903ad6879848d0fdb912aac703167 */
+    /* 这是云宫上方的头像/装饰图，圆形显示，带粉边光晕 */
+    .hero .avatar {
+      width: 100px; height: 100px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid rgba(255,200,240,.7);
-      box-shadow: 0 6px 20px rgba(255,122,198,.4);
-      margin-bottom: 10px;
-      /* 如果用的是花/装饰图而不是头像，把上面 border-radius 改成 0 即可 */
-      /* 示例：display:inline-block; 不用圆形 */
+      border: 3px solid rgba(255,200,240,.8);
+      box-shadow: 0 6px 24px rgba(255,122,198,.45);
+      margin-bottom: 12px;
+      display: block;
+      margin-left: auto; margin-right: auto;
     }
+    /* 头像外圈旋转光环 */
+    .avatar-wrap {
+      position: relative;
+      width: 112px; height: 112px;
+      margin: 0 auto 12px;
+    }
+    .avatar-wrap::before {
+      content: "";
+      position: absolute; inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #ff7ac6, #a86bff, #ffd6f5, #ff7ac6);
+      animation: spin 6s linear infinite;
+      z-index: -1;
+    }
+    .avatar-wrap .avatar {
+      width: 100px; height: 100px;
+      margin: 6px;
+      margin-bottom: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     .hero h1 {
-      font-size: 30px; font-weight: 800;
+      font-size: 32px; font-weight: 800;
       background: linear-gradient(135deg, #ffd6f5, #c5b4ff, #ffd6f5);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      letter-spacing: 4px;
+      letter-spacing: 6px;
+      margin-bottom: 6px;
     }
     .hero p.sub {
-      margin-top: 8px; font-size: 14px; color: rgba(255,255,255,.8);
-      letter-spacing: 1px; line-height: 1.7;
+      margin-top: 8px; font-size: 14px; color: rgba(255,255,255,.82);
+      letter-spacing: 1px; line-height: 1.8;
     }
 
     /* ========== 加群按钮 ========== */
@@ -211,11 +238,16 @@
 
   <!-- 顶部 -->
   <div class="hero">
-    <!-- ===== 【图片2/3】云宫上方装饰图：把 src 里的文件名换成你的花/头像图 ===== -->
-    <img class="deco-img" src="c4ced31b16e6aa56083989d5eaf237c8">
+    <!-- ===== 【图片2/3 云宫头像】===== -->
+    <!-- 文件名: 151903ad6879848d0fdb912aac703167 -->
+    <!-- 上传到仓库时保持这个文件名，或改成 avatar.png 并同步修改下面 src -->
+    <div class="avatar-wrap">
+      <img class="avatar" src="151903ad6879848d0fdb912aac703167" alt="云宫头像">
+    </div>
     <h1>云 宫</h1>
     <p class="sub">
       这里是云宫的小据点 (⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)<br>
+      <span style="font-size:12px;color:rgba(255,255,255,.6);">~ 给云宫买新 Cos 服的集资基地 ~</span>
     </p>
   </div>
 
@@ -231,7 +263,7 @@
 
     <div class="step">
       <div class="num">1</div>
-      <div>支付 <b>¥5</b> 集资款</div>
+      <div>支付 <b>¥5</b> 集资款（让云宫穿新皮肤！）</div>
     </div>
     <div class="step">
       <div class="num">2</div>
@@ -251,15 +283,18 @@
     <div class="highlight">
       集资目标：给云宫买 <b>新 Cos 服</b>！(๑•̀ㅂ•́)و✧<br>
       只需 <span class="price">¥5</span> 就能成为赞助御主<br>
-      截图发给 <b>QQ 1528853590</b>，管理员看到会通过～
+      截图发给 <b>QQ 1528853590</b>，管理员看到马上通过～<br>
+      <span style="font-size:12px;color:rgba(255,255,255,.7);">群内会不定时发放福利</span>
     </div>
 
     <!-- 收款码 -->
     <h2>💳 微信扫码付 5 元</h2>
     <div class="pay-row">
       <div class="qr">
-        <!-- ===== 【图片3/3】微信收款码：把 src 里的文件名换成你的收款码图 ===== -->
-        <img src="fb552183d65c96d9a0f74ceec6bb6473">
+        <!-- ===== 【图片3/3 微信收款码】===== -->
+        <!-- 文件名: fb552183d65c96d9a0f74ceec6bb6473 -->
+        <!-- 上传到仓库时保持这个文件名，或改成 wechat_pay.png 并同步修改下面 src -->
+        <img src="fb552183d65c96d9a0f74ceec6bb6473" alt="微信收款码">
       </div>
       <div class="qr-note">
         <div class="tip">↓ 长按识别付款 ↓</div>
@@ -312,7 +347,6 @@
           setTimeout(function () { btn.classList.remove('copied'); }, 1400);
         }, function () { showToast('复制失败，请手动长按'); });
       } else {
-        // 兼容旧浏览器
         var ta = document.createElement('textarea');
         ta.value = qq; document.body.appendChild(ta); ta.select();
         try { document.execCommand('copy'); showToast('QQ号已复制 ✔'); }
