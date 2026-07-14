@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>云宫 ✨ 集资小窝</title>
+  <style>
+    /* ========== 全局重置 ========== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; min-height: 100vh; }
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+      /* ===== 【图片1/3】全背景图：把下面的文件名换成你的主播背景图 ===== */
+      background: linear-gradient(180deg, rgba(20,10,40,.55) 0%, rgba(60,20,80,.65) 50%, rgba(20,10,40,.7) 100%),
+                  url("c4ced31b16e6aa56083989d5eaf237c8");
+      background-size: cover;
+      background-position: center top;
+      background-attachment: fixed;
+      position: relative;
+    }
+
+    /* 漂浮小星星装饰 */
+    body::before {
+      content: "✦ ✧ ❀ ✦ ✧ ❀";
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      font-size: 14px; letter-spacing: 40px; line-height: 60px;
+      color: rgba(255,255,255,.08);
+      pointer-events: none; z-index: 0;
+      overflow: hidden;
+    }
+
+    /* ========== 主容器 ========== */
+    .wrap {
+      position: relative; z-index: 1;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 36px 20px 60px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    /* ========== 顶部标题区 ========== */
+    .hero { text-align: center; margin-bottom: 28px; }
+    /* ===== 【图片2/3】标题装饰花/头像图：把下面的文件名换成你的装饰图 ===== */
+    .hero .deco-img {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255,200,240,.7);
+      box-shadow: 0 6px 20px rgba(255,122,198,.4);
+      margin-bottom: 10px;
+      /* 如果用的是花/装饰图而不是头像，把上面 border-radius 改成 0 即可 */
+      /* 示例：display:inline-block; 不用圆形 */
+    }
+    .hero h1 {
+      font-size: 30px; font-weight: 800;
+      background: linear-gradient(135deg, #ffd6f5, #c5b4ff, #ffd6f5);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: 4px;
+    }
+    .hero p.sub {
+      margin-top: 8px; font-size: 14px; color: rgba(255,255,255,.8);
+      letter-spacing: 1px; line-height: 1.7;
+    }
+
+    /* ========== 加群按钮 ========== */
+    .join-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; max-width: 340px; height: 56px;
+      border: none; border-radius: 28px; cursor: pointer;
+      font-size: 18px; font-weight: 700; color: #fff;
+      background: linear-gradient(135deg, #ff7ac6, #a86bff);
+      box-shadow: 0 8px 24px rgba(168,107,255,.45);
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    .join-btn:hover { transform: scale(1.04); box-shadow: 0 10px 30px rgba(168,107,255,.6); }
+    .join-btn:active { transform: scale(.98); }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 8px 24px rgba(168,107,255,.45); }
+      50%     { box-shadow: 0 8px 32px rgba(255,122,198,.6); }
+    }
+
+    /* ========== 信息卡片 ========== */
+    .card {
+      width: 100%; margin-top: 28px;
+      background: rgba(255,255,255,.13);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 22px;
+      padding: 24px 22px;
+      color: #fff;
+    }
+    .card h2 {
+      font-size: 19px; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+      color: #ffe6f7;
+    }
+    .card .step {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-bottom: 14px; font-size: 15px; line-height: 1.7;
+    }
+    .card .step .num {
+      flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+      background: linear-gradient(135deg,#ff7ac6,#a86bff);
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    .card .step b { color: #ffd6f5; }
+    .card .highlight {
+      background: rgba(255,122,198,.18);
+      border: 1px dashed rgba(255,180,230,.5);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 10px 0 16px;
+      font-size: 14px; line-height: 1.8;
+      text-align: center;
+    }
+    .card .highlight .price { font-size: 22px; font-weight: 800; color: #ffd166; }
+
+    /* ========== QQ号可点击复制 ========== */
+    .qq-copy {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 10px;
+      padding: 4px 12px;
+      font-weight: 700; font-size: 16px; color: #ffd6f5;
+      cursor: pointer; user-select: all;
+      transition: background .2s;
+    }
+    .qq-copy:hover { background: rgba(255,255,255,.26); }
+    .qq-copy .copy-hint { font-size: 11px; color: rgba(255,255,255,.65); font-weight: 400; }
+    .qq-copy.copied { background: rgba(120,255,180,.25); border-color: rgba(120,255,180,.5); color: #b6ffd9; }
+
+    /* ========== 收款码区 ========== */
+    .pay-row {
+      display: flex; align-items: center; gap: 16px;
+      margin-top: 6px;
+    }
+    .pay-row .qr {
+      width: 110px; height: 110px; flex-shrink: 0;
+      border-radius: 14px; overflow: hidden;
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      padding: 6px;
+    }
+    .pay-row .qr img {
+      width: 100%; height: 100%; object-fit: contain;
+    }
+    .pay-row .qr-note { font-size: 13px; color: rgba(255,255,255,.85); line-height: 1.6; }
+    .pay-row .qr-note .tip { color: #ffd166; font-weight: 700; font-size: 14px; }
+
+    /* ========== 分割线 ========== */
+    .divider {
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+      margin: 20px auto;
+    }
+
+    /* ========== 微信好友位 ========== */
+    .friend-block { text-align: center; }
+    .friend-block .title { font-size: 16px; color: #ffe6f7; margin-bottom: 8px; }
+    .friend-block .price-row {
+      display: flex; justify-content: center; gap: 18px; flex-wrap: wrap;
+    }
+    .friend-block .p-tag {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 12px; padding: 8px 16px;
+      font-size: 14px;
+    }
+    .friend-block .p-tag b { color: #ffd166; font-size: 18px; }
+    .friend-block .douyin {
+      margin-top: 10px; font-size: 13px; color: rgba(255,255,255,.75);
+    }
+
+    /* ========== Toast 提示 ========== */
+    .toast {
+      position: fixed; left: 50%; top: 50%;
+      transform: translate(-50%,-50%) scale(.9);
+      background: rgba(0,0,0,.72); color: #fff;
+      padding: 12px 24px; border-radius: 10px;
+      font-size: 14px; z-index: 999;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s, transform .25s;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+
+    /* ========== Footer ========== */
+    .footer {
+      margin-top: 36px; font-size: 12px;
+      color: rgba(255,255,255,.45); text-align: center;
+      letter-spacing: 2px;
+    }
+
+    /* ========== 移动端微调 ========== */
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 26px; }
+      .pay-row { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- 顶部 -->
+  <div class="hero">
+    <!-- ===== 【图片2/3】云宫上方装饰图：把 src 里的文件名换成你的花/头像图 ===== -->
+    <img class="deco-img" src="c4ced31b16e6aa56083989d5eaf237c8">
+    <h1>云 宫</h1>
+    <p class="sub">
+      这里是云宫的小据点 (⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)<br>
+    </p>
+  </div>
+
+  <!-- 加群按钮：点击跳转 QQ 加群链接 -->
+  <a class="join-btn" href="https://qm.qq.com/cgi-bin/qm/qr?k=LHWaq2ksUlcb-TCMgpOkmVsIAqmvJYCM&jump_from=webapi&authKey=raDMyc0e1hGNKyiWwgoJknIQ7KPmBZoqy2Y9yqYKpo9wuaUR2ATAXiGtY0/rrV8I" target="_blank" rel="noopener">
+    💬 点击加入云宫QQ群
+  </a>
+
+  <!-- 信息卡片 -->
+  <div class="card">
+
+    <h2>🎀 入群方式</h2>
+
+    <div class="step">
+      <div class="num">1</div>
+      <div>支付 <b>¥5</b> 集资款</div>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div>把 <b>支付截图</b> 发给 QQ →
+        <!-- 点击复制 QQ 号 -->
+        <span class="qq-copy" id="qqCopy" title="点击复制QQ号">
+          1528853590
+          <span class="copy-hint">点击复制</span>
+        </span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <div>核验通过后立刻拉你进群，福利全部在群里发放 ✨</div>
+    </div>
+
+    <div class="highlight">
+      集资目标：给云宫买 <b>新 Cos 服</b>！(๑•̀ㅂ•́)و✧<br>
+      只需 <span class="price">¥5</span> 就能成为赞助御主<br>
+      截图发给 <b>QQ 1528853590</b>，管理员看到会通过～
+    </div>
+
+    <!-- 收款码 -->
+    <h2>💳 微信扫码付 5 元</h2>
+    <div class="pay-row">
+      <div class="qr">
+        <!-- ===== 【图片3/3】微信收款码：把 src 里的文件名换成你的收款码图 ===== -->
+        <img src="fb552183d65c96d9a0f74ceec6bb6473">
+      </div>
+      <div class="qr-note">
+        <div class="tip">↓ 长按识别付款 ↓</div>
+        付完 <b>截图</b><br>
+        发给 <b>QQ 1528853590</b><br>
+        坐等被拉进群就好啦～
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 微信好友位 -->
+    <div class="friend-block">
+      <div class="title">🌷 微信好友位（喜欢跟粉丝聊天喵）</div>
+      <div class="price-row">
+        <div class="p-tag">普通位 <b>¥30</b></div>
+        <div class="p-tag">特别位 <b>¥66</b></div>
+      </div>
+      <div class="douyin">🎵 抖音可互关哦～ 同样 ¥66 安排</div>
+    </div>
+
+  </div>
+
+  <div class="footer">云宫 © 2026 · 小星球常驻入口</div>
+
+</div>
+
+<!-- Toast 提示 -->
+<div class="toast" id="toast">QQ号已复制 ✔</div>
+
+<script>
+  /* ========== 点击复制 QQ 号 ========== */
+  (function () {
+    var btn = document.getElementById('qqCopy');
+    var toast = document.getElementById('toast');
+    var qq = '1528853590';
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(function () { toast.classList.remove('show'); }, 1400);
+    }
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(qq).then(function () {
+          btn.classList.add('copied');
+          showToast('QQ号已复制 ✔');
+          setTimeout(function () { btn.classList.remove('copied'); }, 1400);
+        }, function () { showToast('复制失败，请手动长按'); });
+      } else {
+        // 兼容旧浏览器
+        var ta = document.createElement('textarea');
+        ta.value = qq; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); showToast('QQ号已复制 ✔'); }
+        catch (err) { showToast('复制失败，请手动长按'); }
+        document.body.removeChild(ta);
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
